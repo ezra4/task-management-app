@@ -4,6 +4,7 @@ import github.taskmanagementapp.dto.CredentialsDTO;
 import github.taskmanagementapp.dto.UserDTO;
 import github.taskmanagementapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,9 @@ public class LoginController {
     @PostMapping
     public ResponseEntity<UserDTO> loginWithCredentials(CredentialsDTO credentials)
     {
-
+        UserDTO loggedUser = userService.getUserByCredentials(credentials);
+        if(loggedUser != null)
+            return new ResponseEntity<>(loggedUser, HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 }
