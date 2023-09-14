@@ -30,4 +30,11 @@ public class LoginController {
             return new ResponseEntity<>(loggedUser, HttpStatus.OK);
         else return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
+
+    @PostMapping
+    public ResponseEntity<UserDTO> registerUser(UserDTO userDTO)
+    {
+        UserDTO registeredUser = userService.registerUser(userDTO);
+        return new ResponseEntity<>(registeredUser,HttpStatus.OK);
+    }
 }
