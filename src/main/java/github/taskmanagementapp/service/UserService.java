@@ -56,6 +56,13 @@ public class UserService {
         }
     }
 
+    public UserDTO registerUser(UserDTO userDTO)
+    {
+        User user = UserBuilder.toUser(userDTO);
+        User savedUser = userRepository.save(user);
+        return UserBuilder.toUserDTO(savedUser);
+    }
+
     public void insertUser(UserDTO userDTO) {
         User user = UserBuilder.toUser(userDTO);
         userRepository.save(user);
