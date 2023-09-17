@@ -5,14 +5,14 @@ import lombok.*;
 
 import java.util.UUID;
 
-@Table(name = "Users")
+@Table(name = "users")
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
@@ -26,4 +26,7 @@ public class User {
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+
+    @Column(name = "role", nullable = false)
+    private Role role;
 }

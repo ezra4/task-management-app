@@ -1,7 +1,7 @@
 package github.taskmanagementapp.service;
 
 import github.taskmanagementapp.dto.UserDTO;
-import github.taskmanagementapp.model.User;
+import github.taskmanagementapp.model.UserEntity;
 import github.taskmanagementapp.repo.UserRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ public class UserServiceTests {
     @Test
     public void registerUser_ReturnUser()
     {
-        User user = User.builder()
+        UserEntity userEntity = UserEntity.builder()
                 .username("Vlad")
                 .password("parola")
                 .email("vlad@yahoo.com")
@@ -36,7 +36,7 @@ public class UserServiceTests {
                 .email("vlad@yahoo.com")
                 .build();
 
-        when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
+        when(userRepository.save(Mockito.any(UserEntity.class))).thenReturn(userEntity);
         UserDTO savedUser = userService.registerUser(userDTO);
 
         Assertions.assertThat(savedUser).isNotNull();

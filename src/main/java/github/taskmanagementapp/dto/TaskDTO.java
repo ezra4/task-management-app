@@ -1,6 +1,6 @@
 package github.taskmanagementapp.dto;
 
-import github.taskmanagementapp.model.User;
+import github.taskmanagementapp.model.UserEntity;
 import lombok.*;
 
 import java.util.Date;
@@ -16,5 +16,5 @@ public class TaskDTO {
     String title;
     String description;
     Date dueDate;
-    User user;
+    UserEntity userEntity;
 }

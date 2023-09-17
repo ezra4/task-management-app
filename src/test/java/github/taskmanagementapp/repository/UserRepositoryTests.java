@@ -1,6 +1,6 @@
 package github.taskmanagementapp.repository;
 
-import github.taskmanagementapp.model.User;
+import github.taskmanagementapp.model.UserEntity;
 import github.taskmanagementapp.repo.UserRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,104 +28,104 @@ public class UserRepositoryTests {
     @Test
     public void GetAllUsers_ReturnMoreThan1()
     {
-        User user = User.builder()
+        UserEntity userEntity = UserEntity.builder()
                 .username("Vlad")
                 .password("parola")
                 .email("vlad@yahoo.com")
                 .build();
-        User user2 = User.builder()
+        UserEntity userEntity2 = UserEntity.builder()
                 .username("David")
                 .password("parola")
                 .email("david@yahoo.com")
                 .build();
-        userRepository.save(user);
-        userRepository.save(user2);
+        userRepository.save(userEntity);
+        userRepository.save(userEntity2);
 
-        List<User> users = userRepository.findAll();
+        List<UserEntity> userEntities = userRepository.findAll();
 
-        Assertions.assertThat(users).isNotNull();
+        Assertions.assertThat(userEntities).isNotNull();
     }
 
     @Test
     public void GetByID_ReturnUser()
     {
-        User user = User.builder()
+        UserEntity userEntity = UserEntity.builder()
                 .username("Vlad")
                 .password("parola")
                 .email("vlad@yahoo.com")
                 .build();
-        userRepository.save(user);
+        userRepository.save(userEntity);
 
-        User savedUser = userRepository.findById(user.getId()).get();
+        UserEntity savedUserEntity = userRepository.findById(userEntity.getId()).get();
 
-        Assertions.assertThat(savedUser).isNotNull();
+        Assertions.assertThat(savedUserEntity).isNotNull();
     }
 
     @Test
     public void GetByCredentials_ReturnUser()
     {
-        User user = User.builder()
+        UserEntity userEntity = UserEntity.builder()
                 .username("Vlad")
                 .password("parola")
                 .email("vlad@yahoo.com")
                 .build();
-        userRepository.save(user);
+        userRepository.save(userEntity);
 
-        User loggedInUser = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword()).get();
+        UserEntity loggedInUserEntity = userRepository.findByUsernameAndPassword(userEntity.getUsername(), userEntity.getPassword()).get();
 
-        Assertions.assertThat(loggedInUser).isNotNull();
+        Assertions.assertThat(loggedInUserEntity).isNotNull();
     }
 
     @Test
     public void SaveUser_ReturnSavedUser()
     {
-        User user = User.builder()
+        UserEntity userEntity = UserEntity.builder()
                 .username("Vlad")
                 .password("parola")
                 .email("vlad@yahoo.com")
                 .build();
 
-        User savedUser = userRepository.save(user);
+        UserEntity savedUserEntity = userRepository.save(userEntity);
 
-        Assertions.assertThat(savedUser).isNotNull();
-        Assertions.assertThat(savedUser.getId()).isExactlyInstanceOf(UUID.class);
+        Assertions.assertThat(savedUserEntity).isNotNull();
+        Assertions.assertThat(savedUserEntity.getId()).isExactlyInstanceOf(UUID.class);
     }
 
     @Test
     public void UpdateUser_ReturnNewUser()
     {
-        User user = User.builder()
+        UserEntity userEntity = UserEntity.builder()
                 .username("Vlad")
                 .password("parola")
                 .email("vlad@yahoo.com")
                 .build();
-        userRepository.save(user);
+        userRepository.save(userEntity);
 
-        User savedUser = userRepository.findById(user.getId()).get();
-        savedUser.setUsername("David");
-        savedUser.setPassword("password");
-        savedUser.setEmail("david@gmail.com");
-        userRepository.save(savedUser);
-        User updatedUser = userRepository.findById(savedUser.getId()).get();
+        UserEntity savedUserEntity = userRepository.findById(userEntity.getId()).get();
+        savedUserEntity.setUsername("David");
+        savedUserEntity.setPassword("password");
+        savedUserEntity.setEmail("david@gmail.com");
+        userRepository.save(savedUserEntity);
+        UserEntity updatedUserEntity = userRepository.findById(savedUserEntity.getId()).get();
 
 
-        Assertions.assertThat(updatedUser.getUsername()).isEqualTo("David");
-        Assertions.assertThat(updatedUser.getPassword()).isEqualTo("password");
-        Assertions.assertThat(updatedUser.getEmail()).isEqualTo("david@gmail.com");
+        Assertions.assertThat(updatedUserEntity.getUsername()).isEqualTo("David");
+        Assertions.assertThat(updatedUserEntity.getPassword()).isEqualTo("password");
+        Assertions.assertThat(updatedUserEntity.getEmail()).isEqualTo("david@gmail.com");
     }
 
     @Test
     public void DeleteUser_ReturnUserIsEmpty()
     {
-        User user = User.builder()
+        UserEntity userEntity = UserEntity.builder()
                 .username("Vlad")
                 .password("parola")
                 .email("vlad@yahoo.com")
                 .build();
-        userRepository.save(user);
+        userRepository.save(userEntity);
 
-        userRepository.deleteById(user.getId());
-        Optional<User> deletedUser = userRepository.findById(user.getId());
+        userRepository.deleteById(userEntity.getId());
+        Optional<UserEntity> deletedUser = userRepository.findById(userEntity.getId());
 
         Assertions.assertThat(deletedUser).isEmpty();
     }

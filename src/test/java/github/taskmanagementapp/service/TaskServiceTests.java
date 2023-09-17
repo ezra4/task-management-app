@@ -3,7 +3,7 @@ package github.taskmanagementapp.service;
 import github.taskmanagementapp.dto.TaskDTO;
 import github.taskmanagementapp.dto.UserDTO;
 import github.taskmanagementapp.model.Task;
-import github.taskmanagementapp.model.User;
+import github.taskmanagementapp.model.UserEntity;
 import github.taskmanagementapp.repo.TaskRepository;
 import github.taskmanagementapp.repo.UserRepository;
 import org.assertj.core.api.Assertions;
@@ -39,14 +39,14 @@ public class TaskServiceTests {
                 .password("parola")
                 .email("vlad@yahoo.com")
                 .build();
-        User user = User.builder()
+        UserEntity userEntity = UserEntity.builder()
                 .id(id)
                 .username("Vlad")
                 .password("parola")
                 .email("vlad@yahoo.com")
                 .build();
         Task task = Task.builder()
-                .user(user)
+                .userEntity(userEntity)
                 .title("Curatenie")
                 .description("Curatenie")
                 .dueDate(new Date())
@@ -54,8 +54,8 @@ public class TaskServiceTests {
         List<Task> taskList = new ArrayList<>();
         taskList.add(task);
 
-        when(userRepository.findById(Mockito.any(UUID.class))).thenReturn(Optional.of(user));
-        when(taskRepository.findAllByUser(Mockito.any(User.class))).thenReturn(taskList);
+        when(userRepository.findById(Mockito.any(UUID.class))).thenReturn(Optional.of(userEntity));
+        when(taskRepository.findAllByUserEntity(Mockito.any(UserEntity.class))).thenReturn(taskList);
 
         List<TaskDTO> savedList = taskService.getAllTasksOfAUser(userDTO);
 
