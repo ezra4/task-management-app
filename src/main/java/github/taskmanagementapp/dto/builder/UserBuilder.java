@@ -2,22 +2,22 @@ package github.taskmanagementapp.dto.builder;
 
 import github.taskmanagementapp.dto.CredentialsDTO;
 import github.taskmanagementapp.dto.UserDTO;
-import github.taskmanagementapp.model.User;
+import github.taskmanagementapp.model.UserEntity;
 
 public class UserBuilder {
 
-    public static CredentialsDTO toCredentialsDTO(User user)
+    public static CredentialsDTO toCredentialsDTO(UserEntity userEntity)
     {
-        return new CredentialsDTO(user.getUsername(), user.getPassword());
+        return new CredentialsDTO(userEntity.getUsername(), userEntity.getPassword());
     }
 
-    public static UserDTO toUserDTO(User user)
+    public static UserDTO toUserDTO(UserEntity userEntity)
     {
-        return new UserDTO(user.getId(), user.getUsername(), user.getPassword(), user.getEmail());
+        return new UserDTO(userEntity.getId(), userEntity.getUsername(), userEntity.getPassword(), userEntity.getEmail(), userEntity.getRole());
     }
 
-    public static User toUser(UserDTO userDTO)
+    public static UserEntity toUser(UserDTO userDTO)
     {
-        return new User(userDTO.getId(),userDTO.getUsername(),userDTO.getPassword(),userDTO.getEmail());
+        return new UserEntity(userDTO.getId(),userDTO.getUsername(),userDTO.getPassword(),userDTO.getEmail(), userDTO.getRole());
     }
 }

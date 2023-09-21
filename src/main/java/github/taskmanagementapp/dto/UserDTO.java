@@ -1,5 +1,7 @@
 package github.taskmanagementapp.dto;
 
+import github.taskmanagementapp.model.Role;
+import jakarta.annotation.Nullable;
 import lombok.*;
 
 import java.util.UUID;
@@ -15,4 +17,5 @@ public class UserDTO {
     String username;
     String password;
     String email;
+    @Nullable Role role;
 }
